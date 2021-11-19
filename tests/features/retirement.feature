@@ -3,11 +3,10 @@ Feature: Retirement Age Calculator
 	A program that determines retirement age and date based on birth year and birth month.
 
 	@input
-	Scenario Outline: Enter year I was born
-		Given I am born between 1900 and 2021 year
+	Scenario Outline: Determine valid year input
+		Given Birth year should be between 1900 and 2021 inclusively
 		When I input my "<birth_year>"
-		And hit Enter
-		Then an error message will not show of invalid year
+		Then an error message will not show a ValueError
 		Examples:
 			| birth_year | error
 			| 1900		 | false
@@ -17,11 +16,11 @@ Feature: Retirement Age Calculator
 			| 2022		 | true
 
 	@input
-	Scenario Outline: Enter month I was born
-		Given there are 12 months in a year
-		And "<birth_year>" is valid
+	Scenario Outline: Determine valid month input
+		Given Birth year is valid
+		And Birth month should be between 1 and 12 inclusively
 		When I input my "<birth_month>" by numerical month
-		And not enter "<birth_month>" by name
+		But not enter "<birth_month>" by name
 		Then program will show retirement age in "<year_of_retirement>" and "<month_of_retirement>" as of 2021
 		Examples:
 			| birth_year | birth_month | year_of_retirement | month_of_retirement
@@ -31,7 +30,7 @@ Feature: Retirement Age Calculator
 			| 2000       | october	   | TypeError			| TypeError
 
 	@calculate
-	Scenario Outline: Determine retirement age
+	Scenario Outline: Calculate retirement age
 		Given the "<birth_month>" and "<birth_year>" entered are valid
 		When I enter "<birth_month>" for the month
 		And I enter "<birth_year>" for the year
@@ -51,21 +50,14 @@ Feature: Retirement Age Calculator
 
 
 	@calculate
-	Scenario Outline: Determine month and year of retirement
+	Scenario Outline: Calculate month and year of retirement
 		Given the "<birth_month>" and "<birth_year>" entered are valid
 		When I enter "<birth_month>" for the month
 		And I enter "<birth_year>" for the year
-		Then the month of retirement should be "<month_name>" as of 2021
-		And the year of retirement should be "<retirement_year>" as of 11/18/2021
+		Then the month of retirement should be "<month_of_retirement>" as of 2021
+		And the year of retirement should be "<year_of_retirement>" as of 11/18/2021
 		Examples:
-			| birth_month | birth_year | month_name | retirement_year
-			| 10          | 1989       | August     | 2061
+			| birth_month | birth_year | month_of_retirement | year_of_retirement
+			| 10          | 1989       | August     		 | 2061
 
-	@end
-	Scenario: Exiting program
-		Given the program tells me how to exit the loop
-		And the input is not case-sensitive
-		When I type in the required keys
-		Then I will be prompted that the program has exited
-		And program finishes with successful exit code
 
