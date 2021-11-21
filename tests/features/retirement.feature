@@ -2,7 +2,7 @@
 Feature: Retirement Age Calculator
 	A program that determines retirement age and date based on birth year and birth month.
 
-	@input
+	@birthInput
 	Scenario Outline: Determine valid year input
 		Given Birth year should be between 1900 and 2021 inclusively
 		When I input my "<birth_year>"
@@ -15,7 +15,7 @@ Feature: Retirement Age Calculator
 			| 1893		 | true
 			| 2022		 | true
 
-	@input
+	@birthInput
 	Scenario Outline: Determine valid month input
 		Given Birth year is valid
 		And Birth month should be between 1 and 12 inclusively
@@ -29,7 +29,7 @@ Feature: Retirement Age Calculator
 			| 2000	     | 13          | ValueError    		| ValueError
 			| 2000       | october	   | TypeError			| TypeError
 
-	@calculate
+	@calculateAge
 	Scenario Outline: Calculate retirement age
 		Given the "<birth_month>" and "<birth_year>" entered are valid
 		When I enter "<birth_month>" for the month
@@ -49,7 +49,7 @@ Feature: Retirement Age Calculator
 			| 10          | 2010       | 75             | 4
 
 
-	@calculate
+	@calculateAge
 	Scenario Outline: Calculate month and year of retirement
 		Given the "<birth_month>" and "<birth_year>" entered are valid
 		When I enter "<birth_month>" for the month
