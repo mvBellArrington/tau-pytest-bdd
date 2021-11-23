@@ -193,15 +193,3 @@ def calculate_retirement_date(birth_year, birth_month, age_years, age_months):
 # Err on the side of thoroughness rather than skimpiness.
 # ----------------------------------------------------------------------
 
-def main():
-    birth_year = input("Enter birth year: --> ")
-    age_in_years, age_in_months = calculate_retirement_age(birth_year)
-
-    print(f'Your age is {age_in_years} and {age_in_months} months')
-
-    birth_month = input("Enter birth month: --> ")
-    year, month = calculate_retirement_date(birth_year, birth_month, age_in_years, age_in_months)
-
-    print(f'You will retire in the month {month} and the year {year} ')
-
-main()

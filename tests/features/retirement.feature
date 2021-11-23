@@ -19,11 +19,10 @@ Feature: Retirement Age Calculator
 
 	@calculate_retirement_age
 	Scenario Outline: Calculate retirement age
-		Given the "<birth_month>" and "<birth_year>" entered are valid
-		When I enter "<birth_month>" for the month
-		And I enter "<birth_year>" for the year
-		Then the retirement age should be "<retirement_age>" years as of year 2021
-		And the remaining months of the retirement age should be "<remaining_months>" months
+		Given the <birth_year> entered is valid
+		When I enter <birth_year>
+		Then the retirement age should be <retirement_age> years as of year 2021
+		And the remaining months of the retirement age should be <remaining_months> months
 		Examples:
 			| birth_year | retirement_age | remaining_months
 			| 1900       | 65	          | 0
@@ -40,7 +39,7 @@ Feature: Retirement Age Calculator
 	Scenario Outline: Calculate month and year of retirement
 		Given the valid birth month is "<birth_month>"
 		And the valid birth year is "<birth_year>"
-		And  the retirement age is "<retirement_age>" and "<remaining_months>"
+		And the retirement age is "<retirement_age>" and "<remaining_months>"
 		When I calculate the retirement date
 		Then the month of retirement should be "<month>" as of 2021
 		And the year of retirement should be "<year>" as of 11/18/2021
