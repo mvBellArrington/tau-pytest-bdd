@@ -21,6 +21,7 @@ Unlike the original assignment,
 this reattempt assignment will not include testing for the DateTemp class.
 """
 
+
 # ----------------------------------------------------------------------
 # Validation Functions
 #
@@ -32,41 +33,41 @@ this reattempt assignment will not include testing for the DateTemp class.
 # ----------------------------------------------------------------------
 
 def _validate_age_month(month):
-  month = int(month)
+    month = int(month)
 
-  if month < 0 or month > 11:
-    raise ValueError(f'Age month "{month}" must be between 0 and 11')
+    if month < 0 or month > 11:
+        raise ValueError(f'Age month "{month}" must be between 0 and 11')
 
-  return month
+    return month
 
 
 def _validate_age_year(year):
-  year = int(year)
+    year = int(year)
 
-  if year < 65 or year > 67:
-    raise ValueError(f'Age year "{year}" must be between 65 and 67')
+    if year < 65 or year > 67:
+        raise ValueError(f'Age year "{year}" must be between 65 and 67')
 
-  return year
+    return year
 
 
 def _validate_birth_month(month):
-  month = int(month)
+    month = int(month)
 
-  if month < 1 or month > 12:
-    raise ValueError(f'Birth month "{month}" must be between 1 and 12')
+    if month < 1 or month > 12:
+        raise ValueError(f'Birth month "{month}" must be between 1 and 12')
 
-  return month
+    return month
 
 
 def _validate_birth_year(year):
-  year = int(year)
+    year = int(year)
 
-  if year < 1900:
-    raise ValueError(f'Birth year "{year}" must be no earlier than 1900')
-  elif year >= 3000:
-    raise ValueError(f'Birth year "{year}" must be earlier than 3000')
+    if year < 1900:
+        raise ValueError(f'Birth year "{year}" must be no earlier than 1900')
+    elif year >= 3000:
+        raise ValueError(f'Birth year "{year}" must be earlier than 3000')
 
-  return year
+    return year
 
 
 # ----------------------------------------------------------------------
@@ -88,34 +89,34 @@ def _validate_birth_year(year):
 # ----------------------------------------------------------------------
 
 def calculate_retirement_age(birth_year):
-  birth_year = _validate_birth_year(birth_year)
+    birth_year = _validate_birth_year(birth_year)
 
-  if birth_year <= 1937:
-    return 65, 0
-  elif birth_year == 1938:
-    return 65, 2
-  elif birth_year == 1939:
-    return 65, 4
-  elif birth_year == 1940:
-    return 65, 6
-  elif birth_year == 1941:
-    return 65, 8
-  elif birth_year == 1942:
-    return 65, 10
-  elif 1943 <= birth_year <= 1954:
-    return 66, 0
-  elif birth_year == 1955:
-    return 66, 2
-  elif birth_year == 1956:
-    return 66, 4
-  elif birth_year == 1957:
-    return 66, 6
-  elif birth_year == 1958:
-    return 66, 8
-  elif birth_year == 1959:
-    return 66, 10
-  else:
-    return 67, 0
+    if birth_year <= 1937:
+        return 65, 0
+    elif birth_year == 1938:
+        return 65, 2
+    elif birth_year == 1939:
+        return 65, 4
+    elif birth_year == 1940:
+        return 65, 6
+    elif birth_year == 1941:
+        return 65, 8
+    elif birth_year == 1942:
+        return 65, 10
+    elif 1943 <= birth_year <= 1954:
+        return 66, 0
+    elif birth_year == 1955:
+        return 66, 2
+    elif birth_year == 1956:
+        return 66, 4
+    elif birth_year == 1957:
+        return 66, 6
+    elif birth_year == 1958:
+        return 66, 8
+    elif birth_year == 1959:
+        return 66, 10
+    else:
+        return 67, 0
 
 
 # ----------------------------------------------------------------------
@@ -135,19 +136,19 @@ def calculate_retirement_age(birth_year):
 # ----------------------------------------------------------------------
 
 def calculate_retirement_date(birth_year, birth_month, age_years, age_months):
-  birth_year = _validate_birth_year(birth_year)
-  birth_month = _validate_birth_month(birth_month)
-  age_years = _validate_age_year(age_years)
-  age_months = _validate_age_month(age_months)
+    birth_year = _validate_birth_year(birth_year)
+    birth_month = _validate_birth_month(birth_month)
+    age_years = _validate_age_year(age_years)
+    age_months = _validate_age_month(age_months)
 
-  year = birth_year + age_years
-  month = birth_month + age_months
+    year = birth_year + age_years
+    month = birth_month + age_months
 
-  if month > 12:
-    year += 1
-    month -= 12
-  
-  return year, month
+    if month > 12:
+        year += 1
+        month -= 12
+
+    return year, month
 
 
 # ----------------------------------------------------------------------
@@ -191,3 +192,16 @@ def calculate_retirement_date(birth_year, birth_month, age_years, age_months):
 # The instructor's solution has a few dozen, mostly from pytest.mark.parametrize.
 # Err on the side of thoroughness rather than skimpiness.
 # ----------------------------------------------------------------------
+
+def main():
+    birth_year = input("Enter birth year: --> ")
+    age_in_years, age_in_months = calculate_retirement_age(birth_year)
+
+    print(f'Your age is {age_in_years} and {age_in_months} months')
+
+    birth_month = input("Enter birth month: --> ")
+    year, month = calculate_retirement_date(birth_year, birth_month, age_in_years, age_in_months)
+
+    print(f'You will retire in the month {month} and the year {year} ')
+
+main()
