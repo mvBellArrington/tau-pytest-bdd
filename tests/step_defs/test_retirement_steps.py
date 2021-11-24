@@ -1,5 +1,4 @@
-import pytest
-from pytest_bdd import given, when, then, parsers, scenario, scenarios
+from pytest_bdd import given, when, then, parsers, scenario
 from retirement import *
 
 CONVERTERS = {
@@ -11,6 +10,10 @@ CONVERTERS = {
 
 
 @scenario('../features/retirement.feature', 'Calculate month and year of retirement')
+def test_retirement_date():
+    pass
+
+
 @given(parsers.parse('the valid birth month is {birth_month}'),
        target_fixture='check_all_inputs',
        converters=CONVERTERS)
@@ -47,8 +50,6 @@ def calculate_retire_date(birth_year, birth_month, retirement_age, remaining_mon
     assert year == year
 
 
-
-
 @scenario('../features/retirement.feature', 'Calculate retirement age')
 def test_cra():
     pass
@@ -83,6 +84,3 @@ def execute_retirement_age(birth_year, retirement_age):
 def execute_remaining_months(birth_year, remaining_months):
     age, months = set_birth_year(birth_year=birth_year)
     assert months == remaining_months
-
-
-
