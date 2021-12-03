@@ -15,12 +15,14 @@ import pytest
 
 from pytest_bdd import scenarios, given, when, then, parsers
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from time import sleep
 
 
 # Constants
 
-DUCKDUCKGO_HOME = 'https://duckduckgo.com/'
+WIKIPEDIA = 'https://www.wikipedia.org/'
 
 
 # Scenarios
@@ -32,20 +34,14 @@ DUCKDUCKGO_HOME = 'https://duckduckgo.com/'
 
 @pytest.fixture
 def browser():
-    # For this example, we will use Chrome
-    # You can change this fixture to use other browsers, too.
-    # A better practice would be to get browser choice from a config file.
-    b = webdriver.Chrome()
-    b.implicitly_wait(10)
-    yield b
-    b.quit()
+    driver = webdriver.Chrome()
 
 
 # Given Steps
 
-@given('the DuckDuckGo home page is displayed', target_fixture='ddg_home')
-def ddg_home(browser):
-    browser.get(DUCKDUCKGO_HOME)
+@given('the Wikipedia home page is displayed', target_fixture='wiki_home')
+def wiki_home(browser):
+    browser.get(WIKIPEDIA)
 
 
 # When Steps

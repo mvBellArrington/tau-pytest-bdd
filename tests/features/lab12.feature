@@ -1,26 +1,25 @@
-Feature: DuckDuckGo Web Browsing
+Feature: Wikipedia Web Browsing
   As a web surfer,
   I want to find information online,
-  So I can learn new things and get tasks done.
+  So I can learn new things.
 
 
   Background:
-    Given the DuckDuckGo home page is displayed
+    Given the Wikipedia home page is displayed
 
+  Scenario: Checking which web driver is used
+    When I pull up the name of the web driver
+    Then The driver name is chrome
 
-  Scenario: Basic DuckDuckGo Search
-    When the user searches for "panda"
-    Then results are shown for "panda"
+  Scenario: Checking which home page is open
+    When I check the title of the current home page
+    Then The title is Wikipedia
 
+  Scenario: Search for 'wake tech' in Wikipedia
+    When I find the element for search input
+    And Send keys into the element
+    Then The search field should have 'wake tech' as input
 
-  Scenario: Lengthy DuckDuckGo Search
-    When the user searches for the phrase:
-      """
-      When in the Course of human events, it becomes necessary for one people
-       to dissolve the political bands which have connected them with another,
-       and to assume among the powers of the earth, the separate and equal
-       station to which the Laws of Nature and of Nature's God entitle them,
-       a decent respect to the opinions of mankind requires that they should
-       declare the causes which impel them to the separation.
-      """
-    Then one of the results contains "Declaration of Independence"
+  Scenario: Pulling up Wake Tech Wikipedia Page
+    When I search for wake tech
+    Then The website will redirect me to the wake tech wikipedia page
