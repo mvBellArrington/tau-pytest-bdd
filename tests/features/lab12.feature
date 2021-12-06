@@ -16,10 +16,9 @@ Feature: Wikipedia Web Browsing
     Then The title is Wikipedia
 
   Scenario: Search for 'wake tech' in Wikipedia
-    When I find the element for search input
-    And Send keys into the element
+    When I find the element for searchInput
     Then The search field should have 'wake tech' as input
 
   Scenario: Pulling up Wake Tech Wikipedia Page
-    When I search for wake tech
-    Then The website will redirect me to the wake tech wikipedia page
+    When I search for element firstHeading
+    Then The website will redirect me to the Wake Technical Community College
